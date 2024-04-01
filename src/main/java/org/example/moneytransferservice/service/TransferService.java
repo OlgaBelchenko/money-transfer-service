@@ -1,16 +1,11 @@
 package org.example.moneytransferservice.service;
 
-import org.example.moneytransferservice.repository.TransferRepository;
-import org.springframework.stereotype.Service;
+import org.example.moneytransferservice.exception.ErrorInputData;
+import org.example.moneytransferservice.model.Transfer;
+import org.example.moneytransferservice.model.Confirmation;
+import org.example.moneytransferservice.model.OperationResult;
 
-@Service
-public class TransferService {
-    private TransferRepository repository;
-
-    public TransferService(TransferRepository repository) {
-        this.repository = repository;
-    }
-
-
-
+public interface TransferService {
+    OperationResult transfer(Transfer transfer);
+    OperationResult confirm(Confirmation confirmation) throws ErrorInputData;
 }

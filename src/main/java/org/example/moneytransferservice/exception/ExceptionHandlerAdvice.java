@@ -9,13 +9,13 @@ import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
 @RestControllerAdvice()
 public class ExceptionHandlerAdvice {
-    @ExceptionHandler(ExceptionTransferConfirmation.class)
-    public ResponseEntity<String> ecHandler(ExceptionTransferConfirmation e) {
+    @ExceptionHandler(ErrorTransferConfirmation.class)
+    public ResponseEntity<String> ecHandler(ErrorTransferConfirmation e) {
         return new ResponseEntity<>(e.getMessage(), INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(ExceptionInputData.class)
-    public ResponseEntity<String> idHandler(ExceptionInputData e) {
+    @ExceptionHandler(ErrorInputData.class)
+    public ResponseEntity<String> idHandler(ErrorInputData e) {
         return new ResponseEntity<>(e.getMessage(), BAD_REQUEST);
     }
 }

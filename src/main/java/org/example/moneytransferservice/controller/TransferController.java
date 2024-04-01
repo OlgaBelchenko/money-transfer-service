@@ -1,25 +1,13 @@
 package org.example.moneytransferservice.controller;
 
-import org.example.moneytransferservice.model.Amount;
-import org.example.moneytransferservice.repository.Operation;
+import org.example.moneytransferservice.exception.ErrorInputData;
+import org.example.moneytransferservice.model.Confirmation;
+import org.example.moneytransferservice.model.Transfer;
+import org.example.moneytransferservice.model.OperationResult;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-public class TransferController {
+public interface TransferController {
+    ResponseEntity<OperationResult> transfer(Transfer transfer) throws ErrorInputData;
 
-    @PostMapping("/transfer")
-    public ResponseEntity<String> transfer(@Validated @RequestBody Amount amount) {
-        // TODO
-        return ResponseEntity.ok("OK");
-    }
-
-    @PostMapping("/confirmOperation")
-    public ResponseEntity<String> confirmOperation(@Validated @RequestBody Operation confirmOperation) {
-        // TODO
-        return ResponseEntity.ok("OK");
-    }
+    ResponseEntity<OperationResult> confirmOperation(Confirmation confirmOperation) throws ErrorInputData;
 }
