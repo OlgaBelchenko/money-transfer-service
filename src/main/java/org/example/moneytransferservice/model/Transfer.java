@@ -8,29 +8,38 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
+@Setter
 public class Transfer {
-    @NotBlank(message = "Введите номер карты")
+    @NotBlank(message = "Не введен номер карты")
     @Digits(integer = 16, fraction = 0, message = "Некорректный номер карты")
     private String cardFromNumber;
 
-    @NotBlank(message = "Введите срок действия карты")
+    @NotBlank(message = "Не введен срок действия карты")
     @Pattern(regexp = "(0[1-9]|1[0-2])/([0-9]{2})", message = "Некорректная дата")
     private String cardFromValidTill;
 
-    @NotBlank(message = "Введите CVV")
+    @NotBlank(message = "Не введен CVV")
     @Digits(integer = 3, fraction = 0, message = "Некорректный формат CVV")
     private String cardFromCVV;
 
-    @NotBlank(message = "Введите номер карты")
+    @NotBlank(message = "Не введен номер карты")
     @Digits(integer = 16, fraction = 0, message = "Некорректный номер карты")
     private String cardToNumber;
 
     @Valid
     private Amount amount;
 
-    @Setter
-    private long id;
+    private String id;
 
-    @Setter
-    private boolean isConfirmed;
+    @Override
+    public String toString() {
+        return "Transfer{" +
+                "cardFromNumber='" + cardFromNumber + '\'' +
+                ", cardFromValidTill='" + cardFromValidTill + '\'' +
+                ", cardFromCVV='" + cardFromCVV + '\'' +
+                ", cardToNumber='" + cardToNumber + '\'' +
+                ", amount=" + amount +
+                ", id='" + id + '\'' +
+                '}';
+    }
 }

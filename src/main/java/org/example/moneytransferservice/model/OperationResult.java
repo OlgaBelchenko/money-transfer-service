@@ -1,17 +1,11 @@
 package org.example.moneytransferservice.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
+@Getter
 public class OperationResult {
-    long transferId;
+    String id;
     String result;
-
-    @Override
-    public String toString() {
-        return "OperationResult{" +
-                "id='" + transferId + '\'' +
-                ", result='" + result + '\'' +
-                '}';
-    }
 }

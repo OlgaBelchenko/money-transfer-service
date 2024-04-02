@@ -1,49 +1,53 @@
 package org.example.moneytransferservice.repository;
 
-import lombok.Getter;
-import org.example.moneytransferservice.logger.Logger;
-import org.example.moneytransferservice.model.Confirmation;
-import org.example.moneytransferservice.model.Transfer;
+import org.example.moneytransferservice.model.ConfirmOperation;
 import org.example.moneytransferservice.model.OperationResult;
+import org.example.moneytransferservice.model.Transfer;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Getter
 @Repository
 public class TransferRepositoryImpl implements TransferRepository {
-    private final Logger logger = Logger.getInstance();
-    private final Map<Long, Transfer> transferOperations;
-    private final List<Confirmation> confirmations;
+    private final Map<String, Transfer> transferOperations;
+    private final List<ConfirmOperation> confirmOperations;
 
     public TransferRepositoryImpl() {
         transferOperations = new ConcurrentHashMap<>();
-        confirmations = Collections.synchronizedList(new ArrayList<>());
+        confirmOperations = Collections.synchronizedList(new ArrayList<>());
     }
 
     @Override
     public OperationResult saveTransfer(Transfer transfer) {
-        long transferId = transfer.getId();
-        transferOperations.put(transferId, transfer);
-        return new OperationResult(transferId, "Операция выполнена");
+        String id = transfer.getId();
+        transferOperations.put(id, transfer);
+        return new OperationResult(id, "Деньги переведены");
     }
 
     @Override
-    public OperationResult confirmTransfer(Confirmation confirmation) {
-        confirmations.add(confirmation);
-        return new OperationResult(confirmation.getTransferId(), "Операция подтверждена");
+    public OperationResult confirmOperation(ConfirmOperation confirmOperation) {
+        confirmOperations.add(confirmOperation);
+        return new OperationResult(confirmOperation.getId(), "Операция подтверждена");
     }
 
-    public long getMaxTransferId() {
+    @Override
+    public int getLatestId() {
+        if (transferOperations.isEmpty()) return 0;
         return transferOperations
                 .keySet()
                 .stream()
-                .max(Comparator.naturalOrder())
-                .get();
+                .mapToInt(Integer::parseInt)
+                .max()
+                .getAsInt();
     }
 
-    public Transfer getTransferById(long id) {
-        return transferOperations.getOrDefault(id, null);
+    @Override
+    public Transfer getTransferById(String id) {
+        if (id == null) return null;
+        return transferOperations.get(id);
     }
 }

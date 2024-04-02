@@ -2,5 +2,6 @@ version: '1'
 services:
   app:
     build: ./
+    image: money-transfer
     ports:
-      - "5500:5500"
+      - 5500:5500

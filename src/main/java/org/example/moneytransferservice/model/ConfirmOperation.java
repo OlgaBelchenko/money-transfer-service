@@ -1,9 +1,11 @@
 package org.example.moneytransferservice.model;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
-public class Confirmation {
-    private long transferId;
+@Setter
+public class ConfirmOperation {
+    private String id;
     private String code;
 }

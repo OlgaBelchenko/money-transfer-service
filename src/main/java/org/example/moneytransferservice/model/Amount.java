@@ -1,11 +1,29 @@
 package org.example.moneytransferservice.model;
 
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.Positive;
 import lombok.Getter;
+import lombok.Setter;
 
-@AllArgsConstructor
+@Setter
 @Getter
 public class Amount {
-    private int value;
+    @Positive(message = "Сумма перевода должна быть больше нуля")
+    private Integer value;
     private String currency;
+
+    public double calculateCommission() {
+        return value / 10000.0;
+    }
+
+    public double calculateValue() {
+        return value / 100.0;
+    }
+
+    @Override
+    public String toString() {
+        return "Amount{" +
+                "value=" + value +
+                ", currency='" + currency + '\'' +
+                '}';
+    }
 }
