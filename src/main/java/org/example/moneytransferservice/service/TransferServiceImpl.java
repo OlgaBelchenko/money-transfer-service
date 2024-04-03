@@ -1,6 +1,7 @@
 package org.example.moneytransferservice.service;
 
 import org.example.moneytransferservice.exception.ErrorInputData;
+import org.example.moneytransferservice.exception.ErrorTransferConfirmation;
 import org.example.moneytransferservice.logger.Logger;
 import org.example.moneytransferservice.model.ConfirmOperation;
 import org.example.moneytransferservice.model.OperationResult;
@@ -36,12 +37,23 @@ public class TransferServiceImpl implements TransferService {
     }
 
     @Override
-    public OperationResult confirm(ConfirmOperation confirmOperation) throws ErrorInputData {
-        // TODO log
-        if (CODE.equals(confirmOperation.getCode())) {
-            return repository.confirmOperation(confirmOperation);
-        } else {
-            throw new ErrorInputData("Неверный код подтверждения");
+    public OperationResult confirm(ConfirmOperation confirmOperation) throws ErrorTransferConfirmation, ErrorInputData {
+        String id = confirmOperation.getId();
+        if (id != null) {
+            Transfer transfer = repository.getTransferById(confirmOperation.getId());
+            if (transfer != null) {
+                transfer.setConfirmationCode(confirmOperation.getCode());
+                logMessage(String.format("Код подтверждения для операции с id %s обновлен.", id));
+            } else {
+                logMessage(String.format("Код подтверждения для операции с id %s обновлен.", id));
+                throw new ErrorTransferConfirmation("Перевод не найден");
+            }
         }
+        return repository.confirmOperation(confirmOperation);
+
+    }
+
+    private void logMessage(String message) {
+        logger.log(message, LOG_FILE_PATH);
     }
 }

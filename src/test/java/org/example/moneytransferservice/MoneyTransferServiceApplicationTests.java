@@ -23,11 +23,11 @@ class MoneyTransferServiceApplicationTests {
             .withExposedPorts(5500);
 
     @Test
-    void testContainerStart() {
+    void testContainerStartPage() {
         Integer port = transferContainer.getMappedPort(5500);
-        ResponseEntity<String> entity = testRestTemplate.getForEntity(
+        ResponseEntity<String> response = testRestTemplate.getForEntity(
                 "http://localhost:" + port, String.class);
 
-        Assertions.assertEquals(entity.getStatusCode(), HttpStatusCode.valueOf(404));
+        Assertions.assertEquals(response.getStatusCode(), HttpStatusCode.valueOf(404));
     }
 }

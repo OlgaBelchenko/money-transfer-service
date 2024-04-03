@@ -31,6 +31,8 @@ public class Transfer {
 
     private String id;
 
+    String confirmationCode;
+
     @Override
     public String toString() {
         return "Transfer{" +
