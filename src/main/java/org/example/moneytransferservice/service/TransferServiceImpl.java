@@ -23,7 +23,7 @@ public class TransferServiceImpl implements TransferService {
 
     @Override
     public OperationResult transfer(Transfer transfer) {
-        int id = repository.getLatestId() + 1;
+        int id = Integer.parseInt(repository.getLatestId()) + 1;
         transfer.setId(String.valueOf(id));
 
         String logMessage = String.format("Перевод с карты №%s на карту №%s. " +

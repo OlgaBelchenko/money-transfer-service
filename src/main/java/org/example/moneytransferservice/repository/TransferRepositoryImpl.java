@@ -29,18 +29,20 @@ public class TransferRepositoryImpl implements TransferRepository {
     public OperationResult confirmOperation(ConfirmOperation confirmOperation) {
         String id = confirmOperation.getId();
         return id == null ?
-                new OperationResult("-1", "Операция не требует подтверждения") : new OperationResult(id, "Операция подтверждена");
+                new OperationResult("-1", "Операция не требует подтверждения") :
+                new OperationResult(id, "Операция подтверждена");
     }
 
     @Override
-    public int getLatestId() {
-        if (transferOperations.isEmpty()) return 0;
-        return transferOperations
-                .keySet()
-                .stream()
-                .mapToInt(Integer::parseInt)
-                .max()
-                .getAsInt();
+    public String getLatestId() {
+        int latestId = transferOperations.isEmpty() ? 0 :
+                transferOperations
+                        .keySet()
+                        .stream()
+                        .mapToInt(Integer::parseInt)
+                        .max()
+                        .getAsInt();
+        return String.valueOf(latestId);
     }
 
     @Override

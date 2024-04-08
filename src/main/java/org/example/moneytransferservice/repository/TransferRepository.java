@@ -9,7 +9,7 @@ public interface TransferRepository {
 
     OperationResult confirmOperation(ConfirmOperation confirmOperation);
 
-    public int getLatestId();
+    public String getLatestId();
 
     public Transfer getTransferById(String id);
 }

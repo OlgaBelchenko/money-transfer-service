@@ -1,26 +1,30 @@
 package org.example.moneytransferservice.service;
 
-import org.junit.jupiter.api.AfterEach;
+import org.example.moneytransferservice.repository.TransferRepositoryImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 
 class TransferServiceImplTest {
+
+    @Mock
+    private TransferRepositoryImpl repository;
+
+    @InjectMocks
+    private TransferServiceImpl service;
 
     @BeforeEach
     void setUp() {
     }
 
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
     void transfer() {
+
     }
 
     @Test
     void confirm() {
+
     }
 }
