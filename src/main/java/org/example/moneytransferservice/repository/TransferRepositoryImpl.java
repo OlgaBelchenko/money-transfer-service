@@ -27,7 +27,7 @@ public class TransferRepositoryImpl implements TransferRepository {
 
     @Override
     public OperationResult confirmOperation(ConfirmOperation confirmOperation) {
-        String id = confirmOperation.getId();
+        String id = confirmOperation.getOperationId();
         return id == null ?
                 new OperationResult("-1", "Операция не требует подтверждения") :
                 new OperationResult(id, "Операция подтверждена");

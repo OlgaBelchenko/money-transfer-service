@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ConfirmOperation {
-    private String id;
+    private String operationId;
     private String code;
 }

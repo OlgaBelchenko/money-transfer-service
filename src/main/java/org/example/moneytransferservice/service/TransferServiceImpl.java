@@ -38,15 +38,15 @@ public class TransferServiceImpl implements TransferService {
 
     @Override
     public OperationResult confirm(ConfirmOperation confirmOperation) throws ErrorTransferConfirmation, ErrorInputData {
-        String id = confirmOperation.getId();
+        String id = confirmOperation.getOperationId();
         if (id != null) {
-            Transfer transfer = repository.getTransferById(confirmOperation.getId());
+            Transfer transfer = repository.getTransferById(confirmOperation.getOperationId());
             if (transfer != null) {
                 transfer.setConfirmationCode(confirmOperation.getCode());
                 logMessage(String.format("Код подтверждения для операции с id %s обновлен.", id));
             } else {
-                logMessage(String.format("Код подтверждения для операции с id %s обновлен.", id));
-                throw new ErrorTransferConfirmation("Перевод не найден");
+                logMessage("Перевод с id " + id + " не найден");
+                throw new ErrorTransferConfirmation("Перевод с id " + id + " не найден");
             }
         }
         return repository.confirmOperation(confirmOperation);

@@ -35,13 +35,13 @@ public class Transfer {
 
     @Override
     public String toString() {
-        return "Transfer{" +
-                "cardFromNumber='" + cardFromNumber + '\'' +
-                ", cardFromValidTill='" + cardFromValidTill + '\'' +
-                ", cardFromCVV='" + cardFromCVV + '\'' +
-                ", cardToNumber='" + cardToNumber + '\'' +
-                ", amount=" + amount +
-                ", id='" + id + '\'' +
+        return "Transfer{\n" +
+                "cardFromNumber='" + cardFromNumber + "\n" +
+                ", cardFromValidTill='" + cardFromValidTill + "\n" +
+                ", cardFromCVV='" + cardFromCVV + "\n" +
+                ", cardToNumber='" + cardToNumber + "\n" +
+                ", amount=" + amount + "\n" +
+                ", id='" + id + "\n" +
                 '}';
     }
 }
